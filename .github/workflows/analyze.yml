@@ -26,14 +26,14 @@ jobs:
                            doxygen
       - name: Generate build files
         run: |
-          mkdir build && cd build
+          mkdir build-output && cd build-output
           cmake .. -GNinja \
                    -DCMAKE_BUILD_TYPE=Debug \
                    -DBUILD_TESTING=ON \
                    -DFIND_LIBUV=ON
       - name: Run build-wrapper
         run: |
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ninja -C build
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ninja -C build-output
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
